@@ -1,0 +1,120 @@
+S61891 NUR ADIBAH BINTI ADNAN NATIVE MOBILE PROGRAMMING LAB3 TASK1 ACT3
+
+2. Use nullable variables
+
+#what is null?
+
+fun main() {
+    val favoriteActor = null
+    println(favoriteActor)
+}
+
+output: null
+
+#Variable reassignments with null
+
+fun main() {
+    var favoriteActor: String? = "Sandra Oh"
+    println(favoriteActor)
+
+    favoriteActor = null
+    println(favoriteActor)
+}
+
+output: Sandra Oh
+        null
+
+#Try it exercise 1:
+
+Now that you can use the nullable String? type, can you initialize a variable with an Int value and reassign it to null?
+
+fun main() {
+    var number: Int? = 10
+    println(number)
+    
+    number = null
+    println(number)
+}
+
+output: 10
+        null
+
+3.Handle nullable variables
+
+fun main() {
+    var favoriteActor: String = "Sandra Oh"
+    println(favoriteActor.length)
+}
+
+output: 9
+
+#Access a property of a nullable variable
+
+fun main() {
+    var favoriteActor: String? = "Sandra Oh"
+    println(favoriteActor.length)
+}
+
+output: Only safe (?.) or non-null asserted (!!.) 
+        calls are allowed on a nullable receiver of type String?
+
+#Use the ?. safe-call operator
+
+fun main() {
+    var favoriteActor: String? = null
+    println(favoriteActor?.length)
+}
+
+output: null
+
+#Use the !! not-null assertion operator
+
+fun main() {
+    var favoriteActor: String? = null
+    println(favoriteActor!!.length)
+}
+
+output: Exception in thread "main" java.lang.NullPointerException
+ at FileKt.main (File.kt:3) 
+ at FileKt.main (File.kt:-1) 
+ at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (:-2) 
+
+#Use the if/else conditionals
+
+fun main() {
+    var favoriteActor: String? = null
+
+    if(favoriteActor != null) {
+      println("The number of characters in your favorite actor's name is ${favoriteActor.length}.")
+    } else {
+      println("You didn't input a name.")
+    }
+}
+
+output: You didn't input a name.
+
+fun main() {
+    var favoriteActor: String? = "Sandra Oh"
+
+    val lengthOfName = if (favoriteActor != null) {
+      favoriteActor.length
+    } else {
+      0
+    }
+
+    println("The number of characters in your favorite actor's name is $lengthOfName.")
+}
+
+output: The number of characters in your favorite actor's name is 9.
+
+#Use the ?: Elvis operator
+
+fun main() {
+    var favoriteActor: String? = "Sandra Oh"
+
+    val lengthOfName = favoriteActor?.length ?: 0
+
+    println("The number of characters in your favorite actor's name is $lengthOfName.")
+}
+
+output: The number of characters in your favorite actor's name is 9.

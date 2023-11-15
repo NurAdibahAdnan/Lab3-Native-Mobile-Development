@@ -1,0 +1,290 @@
+S61891 NUR ADIBAH BINTI ADNAN NATIVE MOBILE PROGRAMMING LAB3 TASK1 ACT5
+
+3.Store a function in a variable
+
+
+fun main() {
+    val trickFunction = trick
+}
+
+fun trick() {
+    println("No treats!")
+}
+
+output: Function invocation 'trick()' expected
+
+#Redefine the function with a lambda expression
+
+fun main() {
+    val trickFunction = trick
+    trick()
+    trickFunction()
+}
+
+val trick = {
+    println("No treats!")
+}
+
+output: No treats!
+        No treats!
+
+4.Use functions as a data type
+
+val trick = {
+    println("No treats!")
+}
+
+val treat: () -> Unit = {
+    println("Have a treat!")
+}
+
+fun main() {
+    val trickFunction = trick
+    trick()
+    trickFunction()
+    treat()
+}
+
+output: No treats!
+        No treats!
+        Have a treat!
+
+#Use a function as a return type
+
+fun main() {
+ val treatFunction = trickOrTreat(false)
+    val trickFunction = trickOrTreat(true)
+    treatFunction()
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: Have a treat!
+        No treats!
+
+#Pass a function to another function as an argument
+
+fun main() {
+    val coins: (Int) -> String = { quantity ->
+        "$quantity quarters"
+    }
+
+    val cupcake: (Int) -> String = {
+        "Have a cupcake!"
+    }
+
+    val treatFunction = trickOrTreat(false, coins)
+    val trickFunction = trickOrTreat(true, cupcake)
+    treatFunction()
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean, extraTreat: (Int) -> String): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        println(extraTreat(5))
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: 5 quarters
+        Have a treat!
+        No treats!
+
+#Nullable function types
+
+fun main() {
+    val coins: (Int) -> String = { quantity ->
+        "$quantity quarters"
+    }
+
+    val treatFunction = trickOrTreat(false, coins)
+    val trickFunction = trickOrTreat(true, null)
+    treatFunction()
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        if (extraTreat != null) {
+            println(extraTreat(5))
+        }
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: 5 quarters
+        Have a treat!
+        No treats!
+
+5.Write lambda expressions with shorthand syntax
+
+fun main() {
+    val coins: (Int) -> String = {
+    "$it quarters"
+}
+
+    val treatFunction = trickOrTreat(false, coins)
+    val trickFunction = trickOrTreat(true, null)
+    treatFunction()
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        if (extraTreat != null) {
+            println(extraTreat(5))
+        }
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: 5 quarters
+        Have a treat!
+        No treats!
+
+#Pass a lambda expression directly into a function
+
+fun main() {
+    val treatFunction = trickOrTreat(false, { "$it quarters" })
+    val trickFunction = trickOrTreat(true, null)
+    treatFunction()
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        if (extraTreat != null) {
+            println(extraTreat(5))
+        }
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: 5 quarters
+        Have a treat!
+        No treats!
+
+#Use trailing lambda syntax
+
+fun main() {
+    val treatFunction = trickOrTreat(false) { "$it quarters" }
+    val trickFunction = trickOrTreat(true, null)
+    treatFunction()
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        if (extraTreat != null) {
+            println(extraTreat(5))
+        }
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: 5 quarters
+        Have a treat!
+        No treats!
+
+6.Use the repeat() function
+
+fun main() {
+    val treatFunction = trickOrTreat(false) { "$it quarters" }
+    val trickFunction = trickOrTreat(true, null)
+    repeat(4) {
+        treatFunction()
+    }
+    trickFunction()
+}
+
+fun trickOrTreat(isTrick: Boolean, extraTreat: ((Int) -> String)?): () -> Unit {
+    if (isTrick) {
+        return trick
+    } else {
+        if (extraTreat != null) {
+            println(extraTreat(5))
+        }
+        return treat
+    }
+}
+
+val trick = {
+    println("No treats!")
+}
+
+val treat = {
+    println("Have a treat!")
+}
+
+output: 5 quarters
+	Have a treat!
+	Have a treat!
+	Have a treat!
+	Have a treat!
+	No treats!
+
